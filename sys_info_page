@@ -47,7 +47,7 @@ report_home_space () {
 		printf "$format" "Dirs" "Files" "Size"
 		printf "$format" "____" "_____" "____"
 	       	printf "$format" $total_dirs $total_files $total_size
-		echo "<PRE>"
+		echo "</PRE>"
 	done
 	return
 }
