@@ -39,9 +39,9 @@ report_home_space () {
 
 	for i in $dir_list; do
 
-		total_files=$(find $i -type f | wc -l)
-		total_dirs=$(find $i -type d | wc -l)
-		total_size=$(du -sh $i | cut -f 1)
+		total_files=$(find $i -type f 2>/dev/null | wc -l)
+		total_dirs=$(find $i -type d 2>/dev/null | wc -l)
+		total_size=$(du -sh $i 2>/dev/null | cut -f 1)
 		echo "<H3>$i</H3>"
 		echo "<PRE>"
 		printf "$format" "Dirs" "Files" "Size"
