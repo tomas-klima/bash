@@ -22,10 +22,30 @@ if (($# != 3)); then
 	exit 1
 fi
 
-principal=$1
-interest=$2
-months=$3
+# checking for valid input
 
+
+if [[ $1 =~ ^[0-9]*\.?[0-9]*$ ]]; then
+	principal=$1
+else 
+	echo "not a number"
+	exit 1
+fi
+
+if [[ $2 =~ ^[0-9]*\.?[0-9]*$ ]]; then
+	interest=$2
+else
+	echo "paramater 2 is not a number"
+	exit 1
+fi
+
+if [[ $3 =~ ^[0-9]*$ ]]; then
+	months=$3
+else	
+	echo "parameter 3 is not a number"
+	exit 1
+fi
+	
 bc <<- EOF
 	scale = 10
 	i = $interest / 12
@@ -34,5 +54,3 @@ bc <<- EOF
 	a = p * ((i * ((1 + i) ^ n)) / (((1 + i) ^ n) -1))
 	print a, "\n"
 EOF
-
-
