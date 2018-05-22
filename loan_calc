@@ -12,7 +12,7 @@ usage () {
 
 	PRINCIPAL is the amount of the loan.
 	INTEREST is the APR as a number (7% = 0.07)
-	MONTHS is the lenght of the loan's term.
+	MONTHS is the lenght of the loan's term. MONTHS must me a whole number.
 
 	EOF
 }
@@ -23,26 +23,14 @@ if (($# != 3)); then
 fi
 
 # checking for valid input
+reg="^[0-9]+(\.[0-9][0-9]?)?"  
 
-
-if [[ $1 =~ ^[0-9]*\.?[0-9]*$ ]]; then
+if [[ $1 =~ $reg && $2 =~ $reg && $3 =~ ^[0-9]*$ ]]; then 
 	principal=$1
-else 
-	echo "not a number"
-	exit 1
-fi
-
-if [[ $2 =~ ^[0-9]*\.?[0-9]*$ ]]; then
-	interest=$2
-else
-	echo "paramater 2 is not a number"
-	exit 1
-fi
-
-if [[ $3 =~ ^[0-9]*$ ]]; then
 	months=$3
-else	
-	echo "parameter 3 is not a number"
+	interest=$2
+else 
+	echo "One or more parameters are not valid"
 	exit 1
 fi
 	
