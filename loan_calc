@@ -23,12 +23,18 @@ if (($# != 3)); then
 fi
 
 # checking for valid input
-reg="^[0-9]+(\.[0-9][0-9]?)?"  
+reg="^[0-9]+(\.[0-9][0-9]*)?$"
+notnull="^0*(\.0+)?$"
 
 if [[ $1 =~ $reg && $2 =~ $reg && $3 =~ ^[0-9]*$ ]]; then 
-	principal=$1
-	months=$3
-	interest=$2
+	if [[ $2 =~ $notnull || $3 =~ $notnull ]]; then
+		echo "INTEREST and MONTH cannot be equal to 0"
+		exit 1
+	else	
+		principal=$1
+		months=$3
+		interest=$2
+	fi
 else 
 	echo "One or more parameters are not valid"
 	exit 1
